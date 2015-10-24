@@ -6,6 +6,201 @@
   [& args]
   (println "Hello, World!"))
 
+(println "Cleanliness is next to godliness")
+
+(defn train
+  []
+  (println "Choo choo!"))
+
+(+ 1 (* 2 3) 4)
+
+(if true "By Zeus's hammer!" "By Aquaman's trident!")
+
+(if false 
+    "By Zeus's hammer!"
+  "By Aquaman's trident!")
+
+(if true
+  (do (println "Success!")
+      "By Zeus's hammer!")
+  (do (println "Failure!")
+      "By Aquaman's trident!"))
+  
+(when true 
+  (println "Success!")
+  "abra cadabra")
+
+(nil? 1)
+
+(nil? nil)
+
+(if "bears eat beets"
+  "bears beets Battlestar Galactica")
+
+(if nil 
+  "This Won't be the result because nil is falsey"
+  "nil is falsey")
+
+(= 1 1)
+
+(= nil nil)
+
+(= 1 2)
+
+(or false nil :large_I_mean_venti :why_cant_I_just_say_large)
+
+(or (= 0 1) (= "yes" "no"))
+
+(or nil)
+
+(and :free_wifi :hot_coffee)
+
+
+(and :feelin_super_cool nil false)
+
+(def failed-protagonist-names 
+  ["Larry Potter" "Doreen the Explorer" "The Incredible Bulk"])
+
+failed-protagonist-names
+
+(defn error-message
+  [severity]
+  (str "OH GOD! IT'S A DISASTER! WE'RE "
+       (if (= severity :mild)
+         "MILDLY INCONVENIENCED!"
+         "DOOOOOMEEED!")))
+
+(error-message :blarght)
+
+(def name4 "Chewbacca")
+name4
+
+(str "\"Uglglglglgllglgllllll\" - " name4)
+
+{:first-name "Charlie"
+ :last-name "McFishwich"}
+
+{"string-key" +}
+
+{:name {:first "John" :middle "Jacob" :last "Jingleheimerschmidt"}}
+
+(hash-map :a 1 :b 2)
+
+(get {:a 0 :b 1} :b)
+
+(get {:a 0 :b {:c "ho hum"}} :b)
+
+({:name "The Human Coffeepot"} :name)
+
+(:a {:a 1 :b 2 :c 3})
+
+(get {:a 1 :b 2 :c 3} :a)
+
+(:d {:a 1 :b 2 :c 3} "No gnome knows homes like Noah knows")
+
+[3 2 1]
+
+(get [3 2 1] 0)
+;vectors start from 0. "0-indexed colletion"
+
+(get ["a" {:name "Pugsley Winterbottom"} "c"] 1)
+
+(vector "creepy" "full" "moon")
+
+(conj [1 2 3] 4)
+;=>[1 2 3 4] yeeey like clojure/conj get it? let's get all together
+; conj adds to the end of the vector!
+
+'(1 2 3 4)
+
+(nth '(:a :b :c) 0)
+;equivalent of get for lists
+
+(nth '(:a :b :c) 2)
+;nth is slower to retrieve element from list than from vector
+; but list is more effective memorywise? vector is indexed...
+; list is like linked-list from SICP?
+
+(list 1 "two" {3 4})
+
+(conj '(1 2 3 4) 5)
+
+;=> (5 1 2 3 4) conj adds to the beginning of the list!
+;list=good access for beggining (adding/reading) and macroessss
+;otherwise indexed vector
+
+#{"kurt vonnegut" 20 :icicle}
+;sorted set (unique values!)
+
+(hash-set 1 1 2 2)
+
+(conj #{:a :b} :b)
+; #{:b :a}
+;don't forget the difference () vs {}
+;why is it not sorted?
+
+(set [3 3 3 4 4])
+;strange behaviour? why is the answer #(4 3)???
+
+(contains? #{:a :b} :a)
+
+(contains? #{:a :b} 3)
+
+(:a #{:a :b})
+
+(get #{:a :b} :a)
+
+(get #{:a nil} nil)
+;always nilllll =)))))))))
+; better use contains?
+
+(get #{:a :b} "kurt vonnegut")
+
+;p48
+
+((or + -) 1 2 3)
+
+((and (= 1 1) +) 1 2 3)
+
+((first [+ 0]) 1 2 3)
+
+(inc 1.1)
+
+(map inc [0 1 2 3])
+;note that map returns list => (1 2 3 4)
+
+(+ (inc 199) (/ 100 (- 7 2)))
+
+
+(+ 200 (/ 100 (- 7 2)))
+;left to right
+
+(+ 200 (/ 100 5))
+
+(+ 200 20)
+
+;*defn
+;*function name
+;*docstring describing the function
+;*parameters listed in brackets
+;*function body
+
+(defn x-chop
+  "Describe the kind of chop you're inflicting on someone"
+  ([name chop-type]
+   (str "I " chop-type " chop " name "! Take that!"))
+  ([name]
+   (x-chop name "karate")))
+; function calls itself when only 1 argument given
+; 1 agrument is  default "karate" chop wow fun!
+
+(x-chop "Kayne West" "slap")
+
+(x-chop "Kayne East")
+;default value for slap is karate in case only argument ot a function
+
+;p54
+
 (defn x-chop
   "Describe the kind of chop you're inflicting on someone"
   ([name chop-type]
