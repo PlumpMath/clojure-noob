@@ -183,6 +183,8 @@
 ;; final-body-parts= empty vector []
 
 ;; destructuring also works...
+
+;; recur remaining etc. splits the sequence into head and tail then it processes the head, adds  it to some result and uses recursion to continue the process with the tail
 (symmetrize-body-parts asym-hobbit-body-parts)
 
 
@@ -204,3 +206,39 @@ dalmatians)
     (recur (inc iteration))))
 
 ;;p65
+
+;; sum with reduce
+
+(reduce + [1 2 3 4])
+;; equivalent to 
+(+ (+ (+ 1 2) 3) 4)
+;; first two elements of the sequence then next then next etc
+(reduce + 15 [1 2 3 4])
+;; optional initial value
+;; then reduce takes 15 + 1 on first step
+
+(defn my-reduce
+  ([f initial coll]
+   (loop [result initial
+          remaining coll]
+     (if (empty? remaining)
+       result
+       (recur (f result (first remaining)) (rest remaining)))))
+  ([f [head & tail]]
+   (my-reduce f head tail)))
+
+(rest [1 2 3 4])
+
+(defn better-symmetrize-body-parts
+  "Expects a seq of maps that have a :name and :size"
+  [asym-body-parts]
+  (reduce (fn [final-body-parts part]
+            (into final-body-parts (set [part (matching-part part)])))
+          []
+          asym-body-parts))
+
+(better-symmetrize-body-parts asym-hobbit-body-parts)
+
+;;spider expander homework
+
+;;p67
